@@ -6,4 +6,4 @@ def home(request):
     return HttpResponse('<h1>HELLO VINYL COLLECTOR</h1>')
 
 def about(request): 
-    return HttpResponse('<h1>ABOUT VINYL COLLECTOR</h1>')
+    return render(request, 'about.html')
