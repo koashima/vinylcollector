@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
-# Create your views here.
 
 class Vinyl: 
     def __init__(self, name, genre, description, r_date):
@@ -18,7 +15,7 @@ vinyls = [
 
 
 def home(request): 
-    return HttpResponse('<h1>HELLO VINYL COLLECTOR</h1>')
+    return render(request, 'home.html')
 
 def about(request): 
     return render(request, 'about.html')
