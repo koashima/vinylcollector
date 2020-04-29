@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . models import Vinyl
 
 def home(request): 
@@ -14,7 +15,9 @@ class VinylList(ListView):
     def get_queryset(self):
         return Vinyl.objects.all()
 
+class VinylDetail(DetailView):
+    model = Vinyl
 
-def vinyls_details(request, vinyl_id):
-    vinyl = Vinyl.objects.get(id=vinyl_id)
-    return render(request, 'vinyls/detail.html', { 'vinyl' : vinyl })
+class VinylCreate(CreateView):
+    model = Vinyl
+    fields = '__all__'
