@@ -8,11 +8,3 @@ class Vinyl(models.Model):
 
     def __str__(self):
         return self.name
-
-# vinyls = [ 
-#     Vinyl('Abbey Road', 'rock', 'literally classic', 1969),
-#     Vinyl('something1', 'rap', 'literally classic', 2000),
-#     Vinyl('2something', 'alternative', 'literally classic', 2001),
-# ]
-
-

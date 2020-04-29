@@ -9,4 +9,8 @@ def about(request):
 
 def vinyls_index(request):
     vinyls = Vinyl.objects.all()
-    return render(request, 'vinyls/index.html', {'vinyls' : vinyls}) 
+    return render(request, 'vinyls/index.html', { 'vinyls' : vinyls }) 
+
+def vinyls_details(request, vinyl_id):
+    vinyl = Vinyl.objects.get(id=vinyl_id)
+    return render(request, 'vinyls/detail.html', { 'vinyl' : vinyl })

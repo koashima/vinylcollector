@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>VINYL DETAIL</h1>
+<div class="card grey darken-4">
+    <div class="card-content teal-text text-lighten-4">
+        <span class="card-title">{{ vinyl.name }}</span>
+        <p>GENRE: {{ vinyl.genre }}</p>
+        <p>DESCRIPTION: {{ vinyl.description }}</p>
+        {% if vinyl.r_date < 2000 %}
+            <p>RELEASE: {{ vinyl.r_date }}</p>
+        {% else %}
+            <p>RELEASE: New</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
