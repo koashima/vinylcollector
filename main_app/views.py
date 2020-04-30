@@ -21,3 +21,7 @@ class VinylDetail(DetailView):
 class VinylCreate(CreateView):
     model = Vinyl
     fields = '__all__'
+
+class VinylUpdate(UpdateView):
+    model = Vinyl
+    fields = '__all__'
