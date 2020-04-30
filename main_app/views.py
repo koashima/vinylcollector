@@ -25,3 +25,7 @@ class VinylCreate(CreateView):
 class VinylUpdate(UpdateView):
     model = Vinyl
     fields = '__all__'
+
+class VinylDelete(DeleteView):
+    model = Vinyl
+    success_url = '/vinyls/'

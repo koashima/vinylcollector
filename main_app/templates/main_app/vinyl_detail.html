@@ -15,9 +15,7 @@
     </div>
     <div class="card-action">
         <a href="{% url 'vinyls_update' vinyl.id %}">EDIT</a>
-    </div>
-    <div class="card-action">
-        <a href="">DELETE</a>
+        <a href="{% url 'vinyls_delete' vinyl.id %}">DELETE</a>
     </div>
 </div>
 
