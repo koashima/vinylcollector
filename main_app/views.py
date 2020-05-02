@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from . models import Vinyl
+from . models import Vinyl, Listening
+from . forms import ListeningForm
 
 def home(request): 
     return render(request, 'home.html')
@@ -15,8 +16,22 @@ class VinylList(ListView):
     def get_queryset(self):
         return Vinyl.objects.all()
 
-class VinylDetail(DetailView):
-    model = Vinyl
+def vinyl_detail(request, pk):
+    vinyl = Vinyl.objects.get(id=pk)
+    listening_form = ListeningForm()
+    return render(request, 'main_app/vinyl_detail.html', {
+        'vinyl' : vinyl,
+        'listening_form': listening_form 
+    })
+
+def add_listening(request, pk):
+    form = ListeningForm(request.POST)
+
+    if form.is_valid():
+        new_listening = form.save(commit=False)
+        new_listening.vinyl_id = pk
+        new_listening.save()    
+    return redirect('vinyls_detail',)
 
 class VinylCreate(CreateView):
     model = Vinyl
