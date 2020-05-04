@@ -1,6 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
+class Contributor(models.Model):
+    artist = models.CharField(max_length=100)
+
+    def __str__(self): 
+        return self.artist
+
+    def get_absolute_url(self):
+        return reverse('contributors_detail', kwargs={'pk': self.id})
+
+
 class Vinyl(models.Model): 
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)

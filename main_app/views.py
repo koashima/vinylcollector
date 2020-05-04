@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from . models import Vinyl, Listening
+from . models import Vinyl, Listening, Contributor
 from . forms import ListeningForm
 
 def home(request): 
@@ -44,3 +44,6 @@ class VinylUpdate(UpdateView):
 class VinylDelete(DeleteView):
     model = Vinyl
     success_url = '/vinyls/'
+
+class ContributorList(ListView):
+    model = Contributor

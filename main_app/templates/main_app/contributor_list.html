@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>CONTRIBUTOR LIST</h1>
+
+{% for contributor in contributor_list %}
+  <div class="card">
+    <a href=""></a>
+    <div class="card-content">
+     <a href=""><span class="card-title">{{ contributor.artist }}</span></a>
+    </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
