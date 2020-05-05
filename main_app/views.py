@@ -47,3 +47,6 @@ class VinylDelete(DeleteView):
 
 class ContributorList(ListView):
     model = Contributor
+
+class ContributorDetail(DetailView):
+    model = Contributor    
