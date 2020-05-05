@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main_app', 
+    'main_app',
+    'channels',
     'chat',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vinylcollector.wsgi.application'
 
+#Channels
+
+ASGI_APPLICATION = 'main_app.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
