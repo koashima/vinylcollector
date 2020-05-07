@@ -31,7 +31,7 @@ def add_listening(request, pk):
         new_listening = form.save(commit=False)
         new_listening.vinyl_id = pk
         new_listening.save()    
-    return redirect('vinyls_detail',)
+    return redirect('vinyls_detail', pk=pk)
 
 class VinylCreate(CreateView):
     model = Vinyl
