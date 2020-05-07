@@ -16,7 +16,8 @@ class Vinyl(models.Model):
     genre = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     r_date = models.IntegerField()
-
+    contributors = models.ManyToManyField(Contributor)
+    
     def __str__(self):
         return self.name
     
