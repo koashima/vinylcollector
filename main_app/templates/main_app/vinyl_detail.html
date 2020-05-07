@@ -46,22 +46,44 @@
 <hr>
 <div class="row">
   <div class="col s6">
-    <h3>{{ cat.name }}'s Toys</h3>
-    {% if cat.toys.count %}
-      {% for toy in cat.toys.all %}
+    <h3>{{ vinyl.name }}'s Contributors</h3>
+    {% if vinyl.contributors.count %}
+      {% for contributor in vinyl.contributors.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="color: {{ toy.color }}">{{ toy.color }}</span> {{ toy.name }}
+                {{ contributor.artist}}
             </span>
           </div>
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Toys :(</h5>
+      <h5>No contributors :(</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+    <div class="col s6">
+        <h3>Available Contributors</h3>
+        {% if contributors.count %}
+        {% for contributor in contributors.all %}
+        <div class="card grey darken-4 teal-text text-lighten-4">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ contributor.artist }}
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_contributor' vinyl.id contributor.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn amber">ADD</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h5>{{vinyl.name}} Already Has All Contributors Available</h5>
+    {% endif %}
+    </div>
+
 </div>
 
 <script>

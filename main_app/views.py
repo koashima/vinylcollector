@@ -18,10 +18,12 @@ class VinylList(ListView):
 
 def vinyl_detail(request, pk):
     vinyl = Vinyl.objects.get(id=pk)
+    contributors_vinyl_doesnt_have = Contributor.objects.exclude(id__in = vinyl.contributors.all().values_list('id'))
     listening_form = ListeningForm()
     return render(request, 'main_app/vinyl_detail.html', {
         'vinyl' : vinyl,
-        'listening_form': listening_form 
+        'listening_form': listening_form,
+        'contributors': contributors_vinyl_doesnt_have
     })
 
 def add_listening(request, pk):
@@ -50,3 +52,7 @@ class ContributorList(ListView):
 
 class ContributorDetail(DetailView):
     model = Contributor    
+
+def assoc_contributor(request, vinyl_id, contributor_id):
+    Vinyl.objects.get(id=vinyl_id).contributors.add(contributor_id)
+    return redirect('vinyls_detail', pk=vinyl_id) 
