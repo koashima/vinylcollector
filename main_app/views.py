@@ -15,12 +15,14 @@ def home(request):
 def about(request): 
     return render(request, 'about.html')
 
-class VinylList(ListView):
+class VinylList(LoginRequiredMixin, ListView):
     model = Vinyl
     
     def get_queryset(self):
         return Vinyl.objects.filter(user=self.request.user)
 
+
+@login_required
 def vinyl_detail(request, pk):
     vinyl = Vinyl.objects.get(id=pk)
     contributors_vinyl_doesnt_have = Contributor.objects.exclude(id__in = vinyl.contributors.all().values_list('id'))
@@ -31,6 +33,7 @@ def vinyl_detail(request, pk):
         'contributors': contributors_vinyl_doesnt_have
     })
 
+@login_required
 def add_listening(request, pk):
     form = ListeningForm(request.POST)
 
@@ -40,7 +43,7 @@ def add_listening(request, pk):
         new_listening.save()    
     return redirect('vinyls_detail', pk=pk)
 
-class VinylCreate(CreateView):
+class VinylCreate(LoginRequiredMixin, CreateView):
     model = Vinyl
     fields = ['name', 'genre', 'description', 'release_Date']
 
@@ -48,25 +51,25 @@ class VinylCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class VinylUpdate(UpdateView):
+class VinylUpdate(LoginRequiredMixin, UpdateView):
     model = Vinyl
     fields = '__all__'
 
-class VinylDelete(DeleteView):
+class VinylDelete(LoginRequiredMixin, DeleteView):
     model = Vinyl
     success_url = '/vinyls/'
 
-class ContributorList(ListView):
+class ContributorList(LoginRequiredMixin, ListView):
     model = Contributor
 
-class ContributorDetail(DetailView):
+class ContributorDetail(LoginRequiredMixin, DetailView):
     model = Contributor
 
-class ContributorCreate(CreateView):
+class ContributorCreate(LoginRequiredMixin, CreateView):
     model = Contributor
     fields = '__all__'
     
-class ContributorUpdate(UpdateView):
+class ContributorUpdate(LoginRequiredMixin, UpdateView):
     model = Contributor
     fields = ['artist']
 
@@ -74,11 +77,10 @@ class ContributorDelete(LoginRequiredMixin, DeleteView):
   model = Contributor
   success_url = '/contributors/'
 
-
+@login_required
 def assoc_contributor(request, vinyl_id, contributor_id):
     Vinyl.objects.get(id=vinyl_id).contributors.add(contributor_id)
     return redirect('vinyls_detail', pk=vinyl_id)
-
 
 def signup(request):
     error_message = ''
