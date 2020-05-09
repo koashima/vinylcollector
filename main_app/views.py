@@ -17,7 +17,7 @@ class VinylList(ListView):
     model = Vinyl
     
     def get_queryset(self):
-        return Vinyl.objects.all()
+        return Vinyl.objects.filter(user=self.request.user)
 
 def vinyl_detail(request, pk):
     vinyl = Vinyl.objects.get(id=pk)
@@ -40,7 +40,7 @@ def add_listening(request, pk):
 
 class VinylCreate(CreateView):
     model = Vinyl
-    fields = '__all__'
+    fields = ['name', 'genre', 'description', 'release_Date']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -72,10 +72,9 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-        return redirect('index')
+            return redirect('vinyls_index')
     else:
         error_message = 'Invalid sign up - try again'
-        
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)

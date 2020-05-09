@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('chat/', include('chat.urls')),
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('vinyls/', views.VinylList.as_view(), name='vinyls_index'),
@@ -16,4 +15,5 @@ urlpatterns = [
     path('vinyls/<int:pk>/', views.ContributorDetail.as_view(), name='contributors_detail'),
     path('vinyls/<int:vinyl_id>/assoc_contributor/<int:contributor_id>/', views.assoc_contributor, name='assoc_contributor'),
     path('accounts/signup/', views.signup, name='signup'),
+    # path('chat/', include('chat.urls')),
 ]
