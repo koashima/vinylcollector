@@ -60,6 +60,13 @@ class ContributorList(ListView):
 class ContributorDetail(DetailView):
     model = Contributor    
 
+
+class ContributorCreate(CreateView):
+    model = Contributor
+    fields = '__all__'
+    
+
+
 def assoc_contributor(request, vinyl_id, contributor_id):
     Vinyl.objects.get(id=vinyl_id).contributors.add(contributor_id)
     return redirect('vinyls_detail', pk=vinyl_id)
