@@ -15,4 +15,5 @@ urlpatterns = [
     path('contributors/', views.ContributorList.as_view(), name='contributors_index'),
     path('vinyls/<int:pk>/', views.ContributorDetail.as_view(), name='contributors_detail'),
     path('vinyls/<int:vinyl_id>/assoc_contributor/<int:contributor_id>/', views.assoc_contributor, name='assoc_contributor'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
