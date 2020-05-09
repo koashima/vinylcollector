@@ -3,6 +3,8 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Vinyl, Listening, Contributor
 from . forms import ListeningForm
 
@@ -58,13 +60,19 @@ class ContributorList(ListView):
     model = Contributor
 
 class ContributorDetail(DetailView):
-    model = Contributor    
-
+    model = Contributor
 
 class ContributorCreate(CreateView):
     model = Contributor
     fields = '__all__'
     
+class ContributorUpdate(UpdateView):
+    model = Contributor
+    fields = ['artist']
+
+class ContributorDelete(LoginRequiredMixin, DeleteView):
+  model = Contributor
+  success_url = '/contributors/'
 
 
 def assoc_contributor(request, vinyl_id, contributor_id):

@@ -18,12 +18,13 @@
           <li><a href="/" class="left brand-logo teal-text text-lighten-4">&nbsp;&nbsp;VINYL COLLECTOR</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'about' %}" class="teal-text text-lighten-4">ABOUT</a></li>
             {% if user.is_authenticated %}
+              <li><a href="{% url 'about' %}" class="teal-text text-lighten-4">ABOUT</a></li>
               <li><a href="{% url 'vinyls_index' %}" class="teal-text text-lighten-4">VINYLS</a></li>
               <li><a href="{% url 'vinyls_create' %}" class="teal-text text-lighten-4">+ NEW VINYL</a></li>
               <li><a href="{% url 'contributors_index' %}" class="teal-text text-lighten-4">CONTRIBUTORS</a></li>
               <li><a href="{% url 'contributors_create' %}" class="teal-text text-lighten-4">+ NEW CONTRIBUTOR</a></li>
+              <li><span class="amber-text">HELLO {{ user.username }}</span></li>
               <li><a  class="teal-text text-lighten-4" href="{% url 'logout' %}">LOG OUT</a></li>
             {% else %}
               <li><a href="{% url 'signup' %}">SIGN UP</a></li>

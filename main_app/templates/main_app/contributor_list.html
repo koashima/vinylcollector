@@ -7,7 +7,7 @@
   <div class="card">
     <a href=""></a>
     <div class="card-content">
-     <a href=""><span class="card-title">{{ contributor.artist }}</span></a>
+     <a href="{% url 'contributors_detail' contributor.id %}"><span class="card-title">{{ contributor.artist }}</span></a>
     </div>
     </a>
   </div>
