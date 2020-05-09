@@ -18,7 +18,8 @@ urlpatterns = [
     path('contributors/<int:pk>/update/', views.ContributorUpdate.as_view(), name='contributors_update'),
     path('contributors/<int:pk>/delete/', views.ContributorDelete.as_view(), name='contributors_delete'),
     path('contributors/<int:pk>/', views.ContributorDetail.as_view(), name='contributors_detail'),
-    path('contributors/<int:vinyl_id>/assoc_contributor/<int:contributor_id>/', views.assoc_contributor, name='assoc_contributor'),
+    path('vinyls/<int:vinyl_id>/assoc_contributor/<int:contributor_id>/', views.assoc_contributor, name='assoc_contributor'),
+    path('vinyls/<int:vinyl_id>/unassoc_contributor/<int:contributor_id>', views.unassoc_contributor, name='unassoc_contributor'),  
     path('accounts/signup/', views.signup, name='signup'),
     path('chat/', include('chat.urls')),
 ]

@@ -82,6 +82,11 @@ def assoc_contributor(request, vinyl_id, contributor_id):
     Vinyl.objects.get(id=vinyl_id).contributors.add(contributor_id)
     return redirect('vinyls_detail', pk=vinyl_id)
 
+@login_required
+def unassoc_contributor(request, vinyl_id, contributor_id):
+  Vinyl.objects.get(id=vinyl_id).contributors.remove(contributor_id)
+  return redirect('vinyls_detail', pk=vinyl_id)
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':

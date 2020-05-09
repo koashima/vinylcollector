@@ -55,6 +55,12 @@
                 {{ contributor.artist}}
             </span>
           </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_contributor' vinyl.id contributor.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="amber btn">REMOVE</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     {% else %}
